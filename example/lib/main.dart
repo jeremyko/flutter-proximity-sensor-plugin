@@ -1,3 +1,4 @@
+//A Flutter app that depends on the plugin, and illustrates how to use it.
 import 'package:flutter/material.dart';
 import 'dart:async';
 

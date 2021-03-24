@@ -1,3 +1,5 @@
+// The Android platform-specific implementation of the plugin API in Kotlin.
+
 package dev.jeremyko.proximity_sensor
 
 import androidx.annotation.NonNull
@@ -22,6 +24,7 @@ class ProximitySensorPlugin: FlutterPlugin, MethodCallHandler {
     channel.setMethodCallHandler(this)
   }
 
+  //TODO 기능을 구현한다.
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     if (call.method == "getPlatformVersion") {
       result.success("Android ${android.os.Build.VERSION.RELEASE}")
