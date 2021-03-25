@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 import 'package:proximity_sensor/proximity_sensor.dart';
 
 void main() {
@@ -15,7 +15,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  //String _platformVersion = 'Unknown';
+  List<StreamSubscription<dynamic>> _streamSubscriptions =
+      <StreamSubscription<dynamic>>[];
+
+  bool _proximityOn = false;
 
   @override
   void initState() {
@@ -25,12 +29,24 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
+    //TODO null check. --> ProximitySensor.proximityEvents
+    _streamSubscriptions
+        .add(ProximitySensor.proximityEvents.listen((ProximityEvent event) {
+      setState(() {
+        _proximityOn = event.getValue();
+        print("in main.dart : " + _proximityOn.toString());
+      });
+    }));
+
+    /*
+    //String platformVersion;
+    bool proximityOn = false;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await ProximitySensor.platformVersion;
+      //platformVersion = await ProximitySensor.platformVersion;
+      //proximityOn = await ProximitySensor.proximityOn;
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      //TODO
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -39,8 +55,10 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      //_platformVersion = platformVersion;
+      _proximityOn = proximityOn;
     });
+    */
   }
 
   @override
@@ -48,10 +66,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Proximity Sensor example'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('proximity : $_proximityOn\n'),
         ),
       ),
     );
