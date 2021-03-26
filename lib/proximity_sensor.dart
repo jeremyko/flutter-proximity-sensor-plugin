@@ -41,9 +41,9 @@ class ProximitySensor {
         //.map((event) => new ProximityEvent(event.cast<int>()));
         .map((event) {
       print("this is dart code --> " + event.toString());
-      return new ProximityEvent(event.cast<int>()[0]); //XXX XXX XXX
+      //return new ProximityEvent(event.cast<int>()[0]); //XXX android 에서는 몇바이트로 넘겨주는지 확인해야.
 
-      //return new ProximityEvent(event.cast<int>());
+      return new ProximityEvent(event.cast<int>()); // 1 byte 를 넘겨주는 경우에 가능.
       //--> list<int,int..>
       //XXX XXX XXX error 안됨. list 임.!
       //--> Unhandled Exception: type 'CastList<int, int>' is not a subtype of type 'int'
