@@ -6,12 +6,11 @@ public class SwiftProximityStreamHandler : NSObject,FlutterStreamHandler
 {
     let notiCenter = NotificationCenter.default
     let device =  UIDevice.current
-    var observer : NSObjectProtocol?
     
     public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
         device.isProximityMonitoringEnabled = true
         
-        observer = notiCenter.addObserver(forName: UIDevice.proximityStateDidChangeNotification,
+        notiCenter.addObserver(forName: UIDevice.proximityStateDidChangeNotification,
                                 object: device,
                                 queue: nil,
                                 using : { (notification) in
@@ -28,7 +27,7 @@ public class SwiftProximityStreamHandler : NSObject,FlutterStreamHandler
     }
     
     public func onCancel(withArguments arguments: Any?) -> FlutterError? {
-        notiCenter.removeObserver(observer!)
+        notiCenter.removeObserver(self)
         device.isProximityMonitoringEnabled = false
         
         return nil
