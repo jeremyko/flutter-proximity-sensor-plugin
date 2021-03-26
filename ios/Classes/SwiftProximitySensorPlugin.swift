@@ -9,6 +9,11 @@ public class SwiftProximityStreamHandler : NSObject,FlutterStreamHandler
     
     public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
         device.isProximityMonitoringEnabled = true
+        if (device.isProximityMonitoringEnabled == false) {
+            return FlutterError(code: "UNAVAILABLE",
+                                message: "proximity sensor unavailable", 
+                                details: nil)
+        }
         
         notiCenter.addObserver(forName: UIDevice.proximityStateDidChangeNotification,
                                 object: device,
