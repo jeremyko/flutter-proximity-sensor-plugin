@@ -10,7 +10,7 @@
 #import "proximity_sensor-Swift.h"
 #endif
 
-////////////////////////////////////////////////////////////////////////////////
+//==============================================================================
 @implementation ProximitySensorPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     [SwiftProximitySensorPlugin registerWithRegistrar:registrar];

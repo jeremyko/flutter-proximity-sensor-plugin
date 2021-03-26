@@ -4,72 +4,11 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 ////////////////////////////////////////////////////////////////////////////////
-//XXX stream 을 받게 추가한것
-const EventChannel _stream_channel = EventChannel('proximity_sensor');
-
-class ProximityEvent {
-  final int onoff;
-  ProximityEvent(this.onoff);
-  bool getValue() => onoff == 0 ? true : false;
-
-  @override
-  String toString() => onoff == 0 ? 'true' : 'false';
-}
-
-/*
-ProximityEvent _listToProximityEvent(int onoff) {
-  return new ProximityEvent(onoff);
-}
-*/
-
-/*
-Stream<ProximityEvent> get proximityEvents {
-  _sensor_events = _stream_channel
-      .receiveBroadcastStream()
-      //.map((event) => _listToProximityEvent(event.cast<int>()));
-      .map((event) => new ProximityEvent(event.cast<int>()));
-  return _sensor_events;
-}
-*/
-
-////////////////////////////////////////////////////////////////////////////////
 class ProximitySensor {
-  static Stream<ProximityEvent> _sensor_events;
-  static Stream<ProximityEvent> get proximityEvents {
-    _sensor_events = _stream_channel.receiveBroadcastStream()
-        //.map((event) => _listToProximityEvent(event.cast<int>()));
-        //.map((event) => new ProximityEvent(event.cast<int>()));
-        .map((event) {
-      print("this is dart code --> " + event.toString());
-      //return new ProximityEvent(event.cast<int>()[0]); //XXX android 에서는 몇바이트로 넘겨주는지 확인해야.
-
-      return new ProximityEvent(event.cast<int>()); // 1 byte 를 넘겨주는 경우에 가능.
-      //--> list<int,int..>
-      //XXX XXX XXX error 안됨. list 임.!
-      //--> Unhandled Exception: type 'CastList<int, int>' is not a subtype of type 'int'
-    }); //XXX TEST
-
-    //print(_sensor_events.toString()); //TEST --> 실행안됨
-    /*
-    print("return events...");
-    print("this is dart code --> " + _sensor_events.toString());
-    */
-    return _sensor_events; //null error 방지  _stream_channel.receiveBroadcastStream() 로 만들어진것을 보내지 않으면 에러 발생
+  static EventChannel _streamChannel = EventChannel('proximity_sensor');
+  static Stream<int> get proximityEvents {
+    return _streamChannel.receiveBroadcastStream().map((event) {
+      return event.cast<int>()[0];
+    });
   }
-  /*
-  //XXX 이게 원래 있던것
-  //static const MethodChannel _channel = const MethodChannel('proximity_sensor');
-
-  // static Future<String> get platformVersion async {
-  //   final String version = await _channel.invokeMethod('getPlatformVersion');
-  //   return version;
-  // }
-
-  static Future<bool> get proximityOn async {
-    // final String version = await _channel.invokeMethod('getPlatformVersion');
-    // return version;
-    final bool onoff = await _channel.invokeMethod('getProximityOnOff');
-    return onoff;
-  }
-  */
 }
