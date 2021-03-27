@@ -1,21 +1,16 @@
-//A Flutter app that depends on the plugin, and illustrates how to use it.
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:proximity_sensor/proximity_sensor.dart';
+import 'dart:developer' as developer;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 void main() {
   FlutterError.onError = (FlutterErrorDetails details) {
     if (isInDebugMode) {
-      // debug mode
       FlutterError.dumpErrorToConsole(details);
-    } else {
-      // production mode
-      //details.exception, details.stack);
     }
   };
-
   runApp(MyApp());
 }
 
@@ -40,12 +35,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    developer.log("initState invoked");
     initPlatformState();
   }
 
   @override
   void dispose() {
     super.dispose();
+    developer.log("dispose invoked");
     _streamSubscription.cancel();
   }
 
@@ -53,8 +50,8 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     _streamSubscription = ProximitySensor.proximityEvents.listen((int event) {
       setState(() {
-        _isNear = (event == 0) ? false : true;
-        //print("in main.dart : " + _isNear.toString());
+        _isNear = (event > 0) ? true : false;
+        developer.log("in main.dart : " + _isNear.toString());
       });
     });
   }

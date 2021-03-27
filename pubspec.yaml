@@ -11,6 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
 flutter:
   plugin:
     platforms:
@@ -19,4 +23,3 @@ flutter:
         pluginClass: ProximitySensorPlugin
       ios:
         pluginClass: ProximitySensorPlugin
-

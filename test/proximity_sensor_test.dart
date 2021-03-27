@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:proximity_sensor/proximity_sensor.dart';
+//import 'package:proximity_sensor/proximity_sensor.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('proximity_sensor');
@@ -15,10 +15,5 @@ void main() {
 
   tearDown(() {
     channel.setMockMethodCallHandler(null);
-  });
-
-  test('getPlatformVersion', () async {
-    //TODO
-    //expect(await ProximitySensor.proximityOn  .platformVersion, '42');
   });
 }
