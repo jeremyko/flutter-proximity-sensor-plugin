@@ -1,4 +1,3 @@
-// The Android platform-specific implementation of the plugin API in Kotlin.
 
 package dev.jeremyko.proximity_sensor
 
@@ -7,7 +6,6 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.EventChannel
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-/** ProximitySensorPlugin */
 class ProximitySensorPlugin: FlutterPlugin  {
   private lateinit var channel : EventChannel
   private lateinit var streamHandler : ProximityStreamHandler

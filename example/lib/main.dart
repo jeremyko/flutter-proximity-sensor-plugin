@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 ////////////////////////////////////////////////////////////////////////////////
 class _MyAppState extends State<MyApp> {
   bool _isNear = false;
-  StreamSubscription<dynamic> _streamSubscription;
+  late StreamSubscription<dynamic> _streamSubscription;
 
   @override
   void initState() {

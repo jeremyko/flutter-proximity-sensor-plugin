@@ -7,6 +7,8 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
+import java.io.IOException
+import java.lang.UnsupportedOperationException
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class ProximityStreamHandler(
@@ -21,7 +23,9 @@ class ProximityStreamHandler(
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
         eventSink = events
         sensorManager =  applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+        proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) ?:
+            throw UnsupportedOperationException("proximity sensor unavailable")
+
         sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL)
     }
 

@@ -1,8 +1,19 @@
 # proximity_sensor
 
-flutter plugin package for proximity sensor(only) 
+easy to use flutter plugin package for proximity sensor (only)
 
-## Usage
+## Getting started
 
-blablabla TODO
+In the `pubspec.yaml` of your flutter project, add the following dependency:
 
+```yaml
+dependencies:
+  ...
+  proximity_sensor:
+```
+
+In your library add the following import:
+
+```dart
+import 'package:proximity_sensor/proximity_sensor.dart';
+```
