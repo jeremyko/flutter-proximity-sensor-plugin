@@ -1,5 +1,5 @@
 name: proximity_sensor
-description: sensor. only for proximity.
+description: simple and easy to use flutter plugin package for proximity sensor (only)
 version: 1.0.1
 homepage: https://github.com/jeremyko/flutter-proximity-sensor-plugin
 
