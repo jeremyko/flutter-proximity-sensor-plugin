@@ -7,7 +7,8 @@ public class SwiftProximityStreamHandler : NSObject,FlutterStreamHandler
     let notiCenter = NotificationCenter.default
     let device =  UIDevice.current
     
-    public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+    public func onListen(withArguments arguments: Any?,
+                         eventSink events: @escaping FlutterEventSink) -> FlutterError? {
         device.isProximityMonitoringEnabled = true
         if (device.isProximityMonitoringEnabled == false) {
             return FlutterError(code: "UNAVAILABLE",
@@ -20,12 +21,9 @@ public class SwiftProximityStreamHandler : NSObject,FlutterStreamHandler
                                 queue: nil,
                                 using : { (notification) in
                                             if let device = notification.object as? UIDevice {
+                                                // true -> something is near
                                                 let onoff:Int8 = device.proximityState ? 1 : 0
-                                                var data = Data()
-                                                withUnsafeBytes(of: onoff) {
-                                                    buffer in data.append(buffer.bindMemory(to: Int8.self))}
-                                                
-                                                events(data)
+                                                events(onoff)
                                             }
                                         })
         return nil

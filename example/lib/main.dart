@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' as foundation;
 import 'dart:async';
 import 'package:proximity_sensor/proximity_sensor.dart';
-import 'dart:developer' as developer;
 
-////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 void main() {
-  FlutterError.onError = (FlutterErrorDetails details) {
-    if (isInDebugMode) {
-      FlutterError.dumpErrorToConsole(details);
-    }
-  };
   runApp(MyApp());
-}
-
-////////////////////////////////////////////////////////////////////////////////
-bool get isInDebugMode {
-  bool inDebugMode = true;
-  assert(inDebugMode = true);
-  return inDebugMode;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,23 +22,24 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    developer.log("initState invoked");
-    initPlatformState();
+    listenSensor();
   }
 
   @override
   void dispose() {
     super.dispose();
-    developer.log("dispose invoked");
     _streamSubscription.cancel();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    _streamSubscription = ProximitySensor.proximityEvents.listen((int event) {
+  Future<void> listenSensor() async {
+    FlutterError.onError = (FlutterErrorDetails details) {
+      if (foundation.kDebugMode) {
+        FlutterError.dumpErrorToConsole(details);
+      }
+    };
+    _streamSubscription = ProximitySensor.events.listen((int event) {
       setState(() {
         _isNear = (event > 0) ? true : false;
-        developer.log("in main.dart : " + _isNear.toString());
       });
     });
   }
