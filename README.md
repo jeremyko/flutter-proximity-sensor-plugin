@@ -1,5 +1,7 @@
 # proximity_sensor
 
+https://pub.dev/packages/proximity_sensor
+
 simple and easy to use flutter plugin package for proximity sensor (only)
 
 ## Getting started
