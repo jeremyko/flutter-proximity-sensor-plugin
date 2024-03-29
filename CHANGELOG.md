@@ -1,5 +1,8 @@
-## 1.0.4
+## 1.1.0
 
+-   turn off screen on Android while listening for proximity events
+
+## 1.0.4
 -   ext.kotlin_version = '1.7.20'
 
 ## 1.0.2
