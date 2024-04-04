@@ -41,11 +41,21 @@ public class SwiftProximityStreamHandler : NSObject,FlutterStreamHandler
 public class SwiftProximitySensorPlugin: NSObject, FlutterPlugin
 {
     static var stream_handler:SwiftProximityStreamHandler = SwiftProximityStreamHandler()
-    static var channel:FlutterEventChannel = FlutterEventChannel()
+    static var eventChannel:FlutterEventChannel = FlutterEventChannel()
+    static var methodChannel:FlutterMethodChannel = FlutterMethodChannel()
     
     public static func register(with registrar: FlutterPluginRegistrar)    {
-        let channel = FlutterEventChannel.init(name: "proximity_sensor", binaryMessenger: registrar.messenger())
-        channel.setStreamHandler(stream_handler)
-     }
+        let eventChannel = FlutterEventChannel.init(name: "proximity_sensor", binaryMessenger: registrar.messenger())
+        eventChannel.setStreamHandler(stream_handler)
+
+        let methodChannel = FlutterMethodChannel(name: "proximity_sensor_enable", binaryMessenger: registrar.messenger())
+
+        let instance = SwiftProximitySensorPlugin()
+        registrar.addMethodCallDelegate(instance, channel: channel)
+    }
+
+  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+    result(FlutterMethodNotImplemented)
+  }
 }
 
