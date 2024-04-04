@@ -21,7 +21,8 @@ class ProximityStreamHandler(
     private var proximitySensor: Sensor? = null
 
     private lateinit var powerManager: PowerManager
-    private lateinit var wakeLock: PowerManager.WakeLock
+    private var wakeLock: PowerManager.WakeLock? = null;
+    private var enableScreenOff: Boolean = false;
 
     @SuppressLint("WakelockTimeout")
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
@@ -34,18 +35,20 @@ class ProximityStreamHandler(
         powerManager = applicationContext.getSystemService(Context.POWER_SERVICE) as
             PowerManager
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            wakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "dev.jeremyko.proximity_sensor:lock")
-            if (!wakeLock.isHeld) {
-                wakeLock.acquire()
+        if (enableScreenOff && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (wakeLock == null) {
+                wakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "dev.jeremyko.proximity_sensor:lock")
+            }
+            if (!wakeLock!!.isHeld) {
+                wakeLock!!.acquire()
             }
         }
     }
 
     override fun onCancel(arguments: Any?) {
         sensorManager.unregisterListener(this, proximitySensor)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            wakeLock.release()
+        if (wakeLock != null && wakeLock!!.isHeld) {
+            wakeLock!!.release()
         }
     }
 
@@ -64,5 +67,12 @@ class ProximityStreamHandler(
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         //do nothing
+    }
+
+    fun setScreenOffEnabled(enabled: Boolean) {
+        enableScreenOff = enabled;
+        if (!enabled && wakeLock != null && wakeLock!!.isHeld) {
+            wakeLock!!.release()
+        }
     }
 }
