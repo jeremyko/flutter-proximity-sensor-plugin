@@ -1,6 +1,10 @@
+## 1.3.0
+-   documentation
+-   enable the screen off behavior on Android (optional)
+
 ## 1.2.0
 -   revert : turn off screen on Android while listening for proximity events
-
+-
 ## 1.1.0
 -   turn off screen on Android while listening for proximity events
 
