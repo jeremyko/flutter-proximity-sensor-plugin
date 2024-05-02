@@ -51,7 +51,7 @@ public class SwiftProximitySensorPlugin: NSObject, FlutterPlugin
         let methodChannel = FlutterMethodChannel(name: "proximity_sensor_enable", binaryMessenger: registrar.messenger())
 
         let instance = SwiftProximitySensorPlugin()
-        registrar.addMethodCallDelegate(instance, channel: channel)
+        registrar.addMethodCallDelegate(instance, channel: methodChannel)
     }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {

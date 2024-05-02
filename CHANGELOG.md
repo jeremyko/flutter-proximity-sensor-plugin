@@ -1,3 +1,6 @@
+## 1.3.1
+-   fix: build on ios
+
 ## 1.3.0
 -   documentation
 -   enable the screen off behavior on Android (optional)
