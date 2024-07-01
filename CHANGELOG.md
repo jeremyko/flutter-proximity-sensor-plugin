@@ -1,3 +1,6 @@
+## 1.3.2
+-   update to support Android Gradle Plugin 8
+
 ## 1.3.1
 -   fix: build on ios
 
