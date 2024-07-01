@@ -4,5 +4,6 @@
 .packages
 .pub/
 android/.idea/
+.idea/
 
 build/

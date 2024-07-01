@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.jeremyko.proximity_sensor_example">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
    <uses-permission android:name="android.hardware.sensor.proximity"/>
    <uses-permission android:name="android.permission.BODY_SENSORS_BACKGROUND"/>
    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
