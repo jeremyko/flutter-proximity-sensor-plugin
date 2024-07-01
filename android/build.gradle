@@ -26,7 +26,9 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
-
+    if (project.android.hasProperty('namespace')) {
+        namespace 'dev.jeremyko.proximity_sensor'
+    }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
