@@ -30,7 +30,6 @@ This is an example.
 Regarding permissions, you may need the following settings in your `AndroidManifest.xml` file:
 
     <uses-permission android:name="android.hardware.sensor.proximity"/>
-    <uses-permission android:name="android.permission.BODY_SENSORS_BACKGROUND"/>
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
 
 **Some recent devices use virtual proximity sensors. There are no physical sensors. I found it hard to trust the sensor information in this case.**
