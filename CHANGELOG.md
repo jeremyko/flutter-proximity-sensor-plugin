@@ -1,3 +1,6 @@
+## 1.3.3
+-   remove not needed permission
+
 ## 1.3.2
 -   update to support Android Gradle Plugin 8
 
