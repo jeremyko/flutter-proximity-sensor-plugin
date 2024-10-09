@@ -40,6 +40,9 @@ class _MyAppState extends State<MyApp> {
 
     // --------------------------------------------------------------------
     // You only need to make this call if you want to turn off the screen.
+    // Add below permission in your AndroidManifest.xml file.
+    //     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
     await ProximitySensor.setProximityScreenOff(true).onError((error, stackTrace) {
       print("could not enable screen off functionality");
       return null;
@@ -48,6 +51,7 @@ class _MyAppState extends State<MyApp> {
 
     _streamSubscription = ProximitySensor.events.listen((int event) {
       setState(() {
+        // print("event = ${event}");
         _isNear = (event > 0) ? true : false;
       });
     });

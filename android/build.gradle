@@ -35,7 +35,7 @@ android {
     }
     defaultConfig {
         namespace "dev.jeremyko.proximity_sensor"
-        minSdkVersion 23
+        minSdkVersion 31
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

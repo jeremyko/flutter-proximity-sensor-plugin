@@ -27,9 +27,12 @@ This is an example.
         android:exported="true"
         ....
 
-Regarding permissions, you may need the following settings in your `AndroidManifest.xml` file:
+**(Android only)**
+WAKE_LOCK permission is needed if you run `setProximityScreenOff(true)` before listening to events
 
-    <uses-permission android:name="android.hardware.sensor.proximity"/>
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+Add below permission in your AndroidManifest.xml file.  
+
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
 
 **Some recent devices use virtual proximity sensors. There are no physical sensors. I found it hard to trust the sensor information in this case.**
