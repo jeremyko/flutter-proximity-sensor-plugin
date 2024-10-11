@@ -1,6 +1,9 @@
+## 1.3.5
+-   minSdkVersion 23
+
 ## 1.3.4
 -   remove permission : ACTIVITY_RECOGNITION 
-
+-   
 ## 1.3.3
 -   remove not needed permission
 -   
