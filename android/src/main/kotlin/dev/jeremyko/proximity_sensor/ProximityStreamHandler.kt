@@ -27,9 +27,10 @@ class ProximityStreamHandler(
     @SuppressLint("WakelockTimeout")
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
         eventSink = events
-        sensorManager =  applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) ?:
+        initProximitySensor();
+        if (proximitySensor == null) {
             throw UnsupportedOperationException("proximity sensor unavailable")
+        }
 
         sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL)
         powerManager = applicationContext.getSystemService(Context.POWER_SERVICE) as
@@ -42,6 +43,24 @@ class ProximityStreamHandler(
             if (!wakeLock!!.isHeld) {
                 wakeLock!!.acquire()
             }
+        }
+    }
+
+    fun isProximitySensorAvailable(): Boolean {
+        if (proximitySensor != null) {
+            return true
+        }
+        initProximitySensor()
+        return proximitySensor != null
+    }
+
+    fun initProximitySensor() {
+        if (!sensorManager.isInitialized) {
+            sensorManager =  applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        }
+
+        if (proximitySensor == null) {
+            proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
         }
     }
 

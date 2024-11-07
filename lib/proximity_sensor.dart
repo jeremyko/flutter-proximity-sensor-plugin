@@ -19,4 +19,9 @@ class ProximitySensor {
       'enabled': enabled,
     });
   }
+
+  static Future<bool> isProximitySensorAvailable() async {
+    return await _methodChannel
+        .invokeMethod<bool>('isProximitySensorAvailable');
+  }
 }

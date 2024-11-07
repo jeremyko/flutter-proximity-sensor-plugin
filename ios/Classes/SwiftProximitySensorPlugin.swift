@@ -55,7 +55,25 @@ public class SwiftProximitySensorPlugin: NSObject, FlutterPlugin
     }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result(FlutterMethodNotImplemented)
+    if call.method == "isProximitySensorAvailable" {
+        isProximitySensorAvailable(result)
+    } else {
+        result(FlutterMethodNotImplemented)
+    }
+  }
+
+  private func isProximitySensorAvailable(result: FlutterResult) {
+    if device.isProximityMonitoringEnabled == true {
+        result(true)
+        return
+    }
+    device.isProximityMonitoringEnabled = true
+    if (device.isProximityMonitoringEnabled == false) {
+        result(false)
+        return
+    }
+    device.isProximityMonitoringEnabled = false
+    result(true)
   }
 }
 
