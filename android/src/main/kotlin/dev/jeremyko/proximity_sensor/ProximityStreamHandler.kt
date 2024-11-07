@@ -55,9 +55,7 @@ class ProximityStreamHandler(
     }
 
     fun initProximitySensor() {
-        if (!sensorManager.isInitialized) {
-            sensorManager =  applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        }
+        sensorManager =  applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         if (proximitySensor == null) {
             proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
