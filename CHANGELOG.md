@@ -1,3 +1,6 @@
+## 1.3.6
+-   android only feature 
+   
 ## 1.3.5
 -   minSdkVersion 23
 
