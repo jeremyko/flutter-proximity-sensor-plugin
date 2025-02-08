@@ -21,23 +21,24 @@ class ProximityStreamHandler(
     private var proximitySensor: Sensor? = null
 
     private lateinit var powerManager: PowerManager
-    private var wakeLock: PowerManager.WakeLock? = null;
-    private var enableScreenOff: Boolean = false;
+    private var wakeLock: PowerManager.WakeLock? = null
+    private var enableScreenOff: Boolean = false
 
     @SuppressLint("WakelockTimeout")
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
         eventSink = events
         sensorManager =  applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) ?:
-            throw UnsupportedOperationException("proximity sensor unavailable")
+        proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) ?: return //sensor is unavailable
 
+        //sensor is available
         sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL)
         powerManager = applicationContext.getSystemService(Context.POWER_SERVICE) as
             PowerManager
 
         if (enableScreenOff && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (wakeLock == null) {
-                wakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "dev.jeremyko.proximity_sensor:lock")
+                wakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, 
+                                                    "dev.jeremyko.proximity_sensor:lock")
             }
             if (!wakeLock!!.isHeld) {
                 wakeLock!!.acquire()

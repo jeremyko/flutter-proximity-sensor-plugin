@@ -1,3 +1,6 @@
+## 1.3.7
+-   fix for web
+   
 ## 1.3.6
 -   android only feature 
    
@@ -6,10 +9,10 @@
 
 ## 1.3.4
 -   remove permission : ACTIVITY_RECOGNITION 
--   
+   
 ## 1.3.3
 -   remove not needed permission
--   
+   
 ## 1.3.2
 -   update to support Android Gradle Plugin 8
 
@@ -22,7 +25,7 @@
 
 ## 1.2.0
 -   revert : turn off screen on Android while listening for proximity events
--
+
 ## 1.1.0
 -   turn off screen on Android while listening for proximity events
 
