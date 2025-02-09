@@ -4,7 +4,10 @@ import 'dart:async';
 import 'package:proximity_sensor/proximity_sensor.dart';
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
@@ -37,7 +40,9 @@ class _MyAppState extends State<MyApp> {
     // Add below permission in your AndroidManifest.xml file.
     //     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     await ProximitySensor.setProximityScreenOff(true).onError((error, stackTrace) {
-      print("could not enable screen off functionality");
+      if (foundation.kDebugMode) {
+        debugPrint("could not enable screen off functionality");
+      }
       return null;
     });
     // -------------------------------------------------- <ANDROID ONLY>
@@ -45,7 +50,7 @@ class _MyAppState extends State<MyApp> {
     _streamSubscription = ProximitySensor.events.listen((int event) {
       setState(() {
         if (foundation.kDebugMode) {
-          print("sensor event = ${event}");
+          debugPrint("sensor event = $event");
         }
         _isNear = (event > 0) ? true : false;
       });
