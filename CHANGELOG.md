@@ -1,3 +1,6 @@
+## 1.3.8
+-   dart format
+
 ## 1.3.7
 -   fix for web
    
