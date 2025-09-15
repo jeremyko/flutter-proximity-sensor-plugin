@@ -1,3 +1,9 @@
+## 1.3.9
+- sets the compileSdkVersion to 36 from 31
+- updates AGP and gradle versions to 8.13.0 and 8.14.3 respectively
+- updates Kotlin version to 2.2.20
+- removes the no longer necessary kotlin-stdlib-jdk7 dependency
+ 
 ## 1.3.8
 -   dart format
 
