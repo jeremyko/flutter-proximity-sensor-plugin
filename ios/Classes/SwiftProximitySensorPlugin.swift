@@ -9,13 +9,18 @@ public class SwiftProximityStreamHandler : NSObject,FlutterStreamHandler
     
     public func onListen(withArguments arguments: Any?,
                          eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+        // Apple's  weird way: 
+        // https://developer.apple.com/documentation/uikit/uidevice/isproximitymonitoringenabled
+        // To determine if proximity monitoring is available, attempt to enable it. 
+        // If the value of the isProximityMonitoringEnabled property remains false, 
+        // proximity monitoring isn’t available.
         device.isProximityMonitoringEnabled = true
         if (device.isProximityMonitoringEnabled == false) {
-            return FlutterError(code: "UNAVAILABLE",
-                                message: "proximity sensor unavailable", 
-                                details: nil)
+            //sensor is unavailable
+            return nil
         }
-        
+
+        //sensor is available
         notiCenter.addObserver(forName: UIDevice.proximityStateDidChangeNotification,
                                 object: device,
                                 queue: nil,
