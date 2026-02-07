@@ -1,3 +1,7 @@
+## 1.3.10
+- fix: correct NotificationCenter observer removal in Swift to prevent memory leak
+- feat: allow checking for availability
+ 
 ## 1.3.9
 - sets the compileSdkVersion to 36 from 31
 - updates AGP and gradle versions to 8.13.0 and 8.14.3 respectively
