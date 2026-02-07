@@ -36,6 +36,10 @@ class ProximitySensorPlugin: FlutterPlugin, MethodCallHandler  {
         streamHandler.setScreenOffEnabled(enabled)
         result.success(null);
       }
+    } else if (call.method == "isProximitySensorAvailable") {
+      result.success(streamHandler.isProximitySensorAvailable())
+    } else {
+      result.notImplemented()
     }
   }
 }

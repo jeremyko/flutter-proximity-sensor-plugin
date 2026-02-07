@@ -29,4 +29,10 @@ class ProximitySensor {
       });
     }
   }
+
+  static Future<bool> isProximitySensorAvailable() async {
+    return await _methodChannel
+            .invokeMethod<bool>('isProximitySensorAvailable') ??
+        false;
+  }
 }
